@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RoomCard: View {
 	let room: Room
+	let selectedRoom: Room?
 
 	var body: some View {
 		VStack {
@@ -19,14 +20,16 @@ struct RoomCard: View {
 				Spacer()
 			}
 			.background(room.color.opacity(0.2))
-			Spacer()
-			Image(systemName: "photo")
-				.font(.title)
-			Spacer()
+//			if selectedRoom == nil || selectedRoom?.id == room.id {
+				Spacer()
+				Image(systemName: "photo")
+					.font(.title)
+					.transition(.opacity)
+				Spacer()
+//			}
 		}
 		.foregroundColor(room.color)
 		.background(room.color.opacity(0.1))
-//		.animation(.spring())
 	}
 }
 
@@ -96,10 +99,9 @@ struct FlowerView: View {
 	}
 }
 
-
 struct Cards_Previews: PreviewProvider {
 	static var previews: some View {
-		RoomCard(room: Room(title: "Preview", color: .red))
+		RoomCard(room: Room(title: "Preview", color: .red), selectedRoom: nil)
 		SpaceCard(selectedRoom: .constant(nil))
 	}
 }
