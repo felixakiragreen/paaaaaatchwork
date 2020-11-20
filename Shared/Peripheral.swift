@@ -21,7 +21,7 @@ struct RightSideBar: View {
 		VStack {
 			Text("sidebar:people/chat/notifications").foregroundColor(.secondary)
 		}
-		.frame(maxWidth: 100, maxHeight: .infinity)
+		.frame(maxWidth: 250, maxHeight: .infinity)
 	}
 }
 
