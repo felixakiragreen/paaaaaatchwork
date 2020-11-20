@@ -14,12 +14,13 @@ Emphasis on a ZUI, with minimal context switching
 - [x] match geometry into the big boi
 - [x] animate the rest into & out of the lazy grid
 - [x] make every room clickable 
+- [x] pop in new room elements (make them green)
+  - [ ] delayed transition
 
 ## TODO
 - [ ] add hover state to room (join room button?)
 - [ ] make the bottom rooms collapse when hopping into a room
 - [ ] pop in new char over top of right side bar
-- [ ] pop in new room elements (make them green) (delayed transition)
 
 ### ADVANCED
 - [ ] when you scroll, collapse the header?
