@@ -10,6 +10,8 @@ import SwiftUI
 struct RoomCard: View {
 	let room: Room
 	let selectedRoom: Room?
+	
+	@State var isHovering = false
 
 	var body: some View {
 		VStack {
@@ -17,6 +19,7 @@ struct RoomCard: View {
 				Text("\(room.title)")
 					.font(.headline)
 					.padding(.all, 8.0)
+					.foregroundColor(isHovering ? .primary : room.color)
 				Spacer()
 			}
 			.background(room.color.opacity(0.2))
@@ -29,12 +32,18 @@ struct RoomCard: View {
 //			}
 		}
 		.foregroundColor(room.color)
-		.background(room.color.opacity(0.1))
+		.background(room.color.opacity(isHovering ? 0.5 : 0.1))
+		.onHover { over in
+			withAnimation(.spring()) {
+				isHovering = over
+			}
+		}
 	}
 }
 
 struct SpaceCard: View {
 	@Binding var selectedRoom: Room?
+	@State var isHovering = false
 
 	var body: some View {
 		VStack {
@@ -58,17 +67,22 @@ struct SpaceCard: View {
 				withAnimation {
 					if selectedRoom != nil {
 						selectedRoom = nil
+						isHovering = false
 					}
-//					show.toggle()
 				}
 			}
-//			.animation(.spring())
 		}
-		.foregroundColor(.purple)
-		.background(Color.purple.opacity(0.1))
+		.foregroundColor(isHovering ? .primary : .purple)
+		.background(Color.purple.opacity(isHovering ? 0.5 : 0.1))
 		.frame(maxHeight: selectedRoom == nil ? 135 : .none)
 		.padding(.horizontal, selectedRoom == nil ? 8 : 0)
-//		.padding([.leading, .bottom, .trailing], selectedRoom == nil ? 8 : 0)
+		.onHover { over in
+			withAnimation(.spring()) {
+				if selectedRoom != nil {
+					isHovering = over
+				}
+			}
+		}
 	}
 }
 
