@@ -21,4 +21,11 @@ var rooms: [Room] = [
 	Room(title: "Room 4", color: .blue),
 	Room(title: "Room 5", color: .blue),
 	Room(title: "Room 6", color: .blue),
+	Room(title: "Room 7", color: .blue),
+]
+
+var subRooms: [Room] = [
+	Room(title: "Submodule 1", color: .green),
+	Room(title: "Submodule 2", color: .green),
+	Room(title: "Submodule 3", color: .green),
 ]
