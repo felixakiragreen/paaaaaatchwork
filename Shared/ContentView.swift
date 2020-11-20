@@ -10,10 +10,11 @@ import SwiftUI
 struct ContentView: View {
 	@Namespace var roomies
 	@State var selectedRoom: Room?
+//		= rooms[0]
   
 	var body: some View {
 		let columns = [
-			GridItem(.adaptive(minimum: 360), spacing: 8)
+			GridItem(), GridItem()
 		]
 	  
 		HStack {
@@ -27,34 +28,38 @@ struct ContentView: View {
 				// do I need whole isSource thnig?
 			  
 				if let room = selectedRoom {
-					RoomCard(room: room)
+					RoomCard(room: room, selectedRoom: selectedRoom)
 						.matchedGeometryEffect(id: room.id, in: roomies)
-						.aspectRatio(16 / 9, contentMode: .fit)
+						.aspectRatio(16 / 9, contentMode: .fill)
 						.padding(.horizontal, 8)
-						// .frame(maxHeight: 480)
-						// .transition(.opacity)
+					// .transition(.opacity)
 				}
 		  
 				ScrollView(.vertical) {
 					LazyVGrid(columns: columns, spacing: 8) {
-						ForEach(rooms) { room in
-							if selectedRoom?.id != room.id {
-								RoomCard(room: room)
-									.matchedGeometryEffect(
-										id: room.id,
-										in: roomies
+						if selectedRoom == nil {
+							ForEach(rooms) { room in
+								if selectedRoom?.id != room.id {
+									RoomCard(room: room, selectedRoom: selectedRoom)
+										.matchedGeometryEffect(
+											id: room.id,
+											in: roomies
 //									,isSource: !show
-									)
-									.aspectRatio(16 / 9, contentMode: .fill)
-									.frame(maxWidth: .infinity)
-//															.transition(.opacity)
-									.onTapGesture {
-										withAnimation(.spring()) {
-											if selectedRoom == nil {
-												selectedRoom = room
+										)
+										.aspectRatio(16 / 9, contentMode: .fill)
+										.onTapGesture {
+											withAnimation(.spring()) {
+												if selectedRoom == nil {
+													selectedRoom = room
+												}
 											}
 										}
-									}
+								}
+							}
+						} else {
+							ForEach(subRooms) { room in
+								RoomCard(room: room, selectedRoom: selectedRoom)
+									.aspectRatio(16 / 9, contentMode: .fill)
 							}
 						}
 					}
